@@ -1,5 +1,6 @@
 <script setup>
 import PollCard from './components/PollCard.vue'
+import ButtonCard from './components/ButtonCard.vue'
 
 </script>
 
@@ -7,6 +8,7 @@ import PollCard from './components/PollCard.vue'
   <v-app>
     <v-main>
       <PollCard/>
+      <ButtonCard/>
     </v-main>
   </v-app>
 
