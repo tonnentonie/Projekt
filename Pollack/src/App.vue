@@ -1,4 +1,6 @@
 <script setup>
+import CreatePoll from './components/CreatePoll.vue'
+
 import PollCard from './components/PollCard.vue'
 import ButtonCard from './components/ButtonCard.vue'
 
@@ -7,6 +9,7 @@ import ButtonCard from './components/ButtonCard.vue'
 <template>
   <v-app>
     <v-main>
+      <CreatePoll/>
       <PollCard/>
       <ButtonCard/>
     </v-main>

@@ -1,7 +1,29 @@
 import { reactive } from "vue";
 const state = reactive({
-    answers:[1,2,3,5],
+    answers:[0,1],
+    question:{
+        question:"",
+        answer1:"",
+        answer2:""
+    },
 })
+const methods = {
+    addAnswer(answer){
+        state.answers.push(answer)
+    },
+
+    createPollCard(){
+
+    },
+
+
+    testlog(){
+        console.log(state.question);
+    }
+
+
+
+}
 
 
 
@@ -9,5 +31,6 @@ const state = reactive({
 
 
 export default{
-    state
+    state,
+    methods
 }
