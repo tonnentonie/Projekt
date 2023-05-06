@@ -7,15 +7,24 @@
       v-model="question.q">
     </v-text-field>
     <v-radio-group
+      v-if="!question.multipleAnswers"
       v-model="answer"
       column
+      multipleAnswers
     >
       <v-radio
         v-for="option in question.a"
         :label="option"
-        :value="option"
+        :value="question.a.indexOf(option)"
       ></v-radio>
     </v-radio-group>
+    <v-checkbox
+      v-if="question.multipleAnswers"
+      v-for="option in question.a"
+      v-model="data.selected"
+      :label="option"
+      :value="question.a.indexOf(option)"
+    ></v-checkbox>
     <v-card-actions>
             <v-btn @click="sendAnswer()" variant="outlined">
                 Abstimmen!
@@ -26,15 +35,25 @@
 
 <script setup>
 import store from "../store/index"
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 const answer = ref()
+var data = reactive({
+  selected: []
+});
 
 function sendAnswer(){
-  console.log(answer.value)
+  if(!question.multipleAnswers){
+   console.log(answer.value) 
+  }
+  else{
+   console.log(data.selected) 
+  }
+  
 }
-function test(a){
-  console.log(a)
+function test(a){ 
+  //console.log(store.state.questions.indexOf(a))
+  
 }
 </script>
 

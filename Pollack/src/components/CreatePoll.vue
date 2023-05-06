@@ -25,9 +25,9 @@
 
         <v-card-actions>
             <v-switch
-                v-model="multipleAnswers"
+                v-model="question.multipleAnswers"
                 hide-details
-                :label="`Mehrere Antworten erlauben (${multipleAnswers})`"
+                :label="`Mehrere Antworten erlauben (${question.multipleAnswers})`"
             ></v-switch>
             <v-btn @click="sendQuestion()" variant="outlined">
                 Erstellen
@@ -40,13 +40,12 @@
   
 <script setup>
 import store from "../store/index"
-import { reactive, ref } from "vue";
-
-var multipleAnswers = ref()
+import { reactive } from "vue";
 
 var question = reactive({
     q: '',
-    a: []
+    a: [],
+    multipleAnswers: false
 })
 
 function sendQuestion() {
@@ -57,6 +56,7 @@ function sendQuestion() {
 function clearQuestion(){
     question.q = '';
     question.a = [];
+    question.multipleAnswers = false;
 }
 </script>
   
