@@ -1,27 +1,11 @@
 import { reactive } from "vue";
 const state = reactive({
-    answers:[0,1],
-    question:{
-        question:"",
-        answer1:"",
-        answer2:""
-    },
+    questions:[],
 })
 const methods = {
-    addAnswer(answer){
-        state.answers.push(answer)
+    addQuestion(q){
+        state.questions.push(q)
     },
-
-    createPollCard(){
-
-    },
-
-
-    testlog(){
-        console.log(state.question);
-    }
-
-
 
 }
 
