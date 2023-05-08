@@ -1,6 +1,6 @@
 
 <template>
-    <v-card>
+    <v-card class="CreatePoll">
         <v-text-field 
             clearable 
             label="Frage:" 
@@ -63,11 +63,10 @@ function clearQuestion(){
   
   
 <style scoped>
-.v-card {
-    background-color: white;
-    margin: 1em auto;
+.CreatePoll {
+    margin: 5em auto;
     padding: 1em;
-    width: 90%;
+    width: 60%;
 }
 
 </style>

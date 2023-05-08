@@ -65,6 +65,6 @@ function test(a){
   background-color: white;
   margin: 1em auto;
   padding: 1em;
-  width: 90%;
+  width: 60%;
 }
 </style>
