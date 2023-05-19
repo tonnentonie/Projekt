@@ -1,13 +1,12 @@
 <template>
-  <v-card v-for="question in store.state.questions" @click="test(question)">
+  <v-card>
     <v-text-field 
-      disabled 
+      readonly 
       label="Frage:" 
       variant="outlined"
-      v-model="question.q">
+      v-model="store.state.question.title">
     </v-text-field>
-    <v-radio-group
-      v-if="!question.multipleAnswers"
+<!-- '    <v-radio-group
       v-model="answer"
       column
       multipleAnswers
@@ -17,30 +16,30 @@
         :label="option"
         :value="question.a.indexOf(option)"
       ></v-radio>
-    </v-radio-group>
-    <v-checkbox
-      v-if="question.multipleAnswers"
-      v-for="option in question.a"
+    </v-radio-group>' -->
+    <!-- <v-checkbox
       v-model="data.selected"
       :label="option"
       :value="question.a.indexOf(option)"
-    ></v-checkbox>
+    ></v-checkbox> -->
     <v-card-actions>
-            <v-btn @click="sendAnswer()" variant="outlined">
-                Abstimmen!
-            </v-btn>
-        </v-card-actions>
+      <v-btn @click="sendAnswer()" variant="outlined">
+        Abstimmen!
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
 <script setup>
 import store from "../store/index"
-import { ref, reactive } from "vue";
+import { onMounted } from "vue";
+import { useRoute } from 'vue-router';
 
-const answer = ref()
-var data = reactive({
-  selected: []
-});
+const route = useRoute();
+
+onMounted(() => {
+  store.methods.getPoll(route.params.token)
+})
 
 function sendAnswer(){
   if(!question.multipleAnswers){
@@ -63,7 +62,7 @@ function test(a){
 <style scoped>
 .v-card {
   background-color: white;
-  margin: 1em auto;
+  margin: 5em auto;
   padding: 1em;
   width: 60%;
 }

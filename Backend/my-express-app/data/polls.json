@@ -1,0 +1,255 @@
+[
+    {
+        "title": "What is your favorite color?",
+        "description": "By blue are also meant blue-like colors, like turkish.",
+        "options": [
+            {
+                "id": 0,
+                "text": "string"
+            },
+            {
+                "id": 0,
+                "text": "string"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-16T15:05"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [
+            {
+                "owner": {
+                    "name": "Philipp"
+                },
+                "choice": [
+                    {
+                        "id": 11233,
+                        "worst": false
+                    },
+                    {
+                        "id": 1212,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-16T12:31:57.998Z",
+                "editCode": "422fa789-4b9e-4614-8df1-e8cf6f88002d"
+            },
+            {
+                "owner": {
+                    "name": "Philipp"
+                },
+                "choice": [
+                    {
+                        "id": 13,
+                        "worst": false
+                    },
+                    {
+                        "id": 1212,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-16T12:32:08.838Z",
+                "editCode": "d0a00f9e-e0f3-43c6-bfbd-ca2d87958b6b"
+            }
+        ],
+        "shareCode": "49004311-10b6-4083-889e-1aa16eff9dfa",
+        "adminCode": "0fced50a-c53e-419b-a746-086956e68e96"
+    },
+    {
+        "title": "What is your favorite color?",
+        "description": "By blue are also meant blue-like colors, like turkish.",
+        "options": [
+            {
+                "id": 0,
+                "text": "string"
+            },
+            {
+                "id": 0,
+                "text": "string"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-16T15:05"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [
+            {
+                "owner": {
+                    "name": "Philipp"
+                },
+                "choice": [
+                    {
+                        "id": 13,
+                        "worst": false
+                    },
+                    {
+                        "id": 12,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-16T12:32:40.778Z",
+                "editCode": "08b17867-ec7d-4900-87e3-7e5b7e7fdeb7"
+            }
+        ],
+        "shareCode": "fe5a4ea0-c749-4148-8503-1af2f9ab6e7d",
+        "adminCode": "13eeaa5d-419d-4659-9057-c1a5e5771e95"
+    },
+    {
+        "title": "What is your favorite color?",
+        "description": "By blue are also meant blue-like colors, like turkish.",
+        "options": [
+            {
+                "id": 0,
+                "text": "string"
+            },
+            {
+                "id": 0,
+                "text": "string"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-16T15:05"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [],
+        "shareCode": "42a3d974-a215-485d-abf6-0e10360c2ec0",
+        "adminCode": "cd76c41b-142f-4e90-b7dc-897a569d1d25"
+    },
+    {
+        "title": "A Frage1",
+        "description": "A Frage1",
+        "options": [
+            {
+                "id": 0,
+                "text": "test1"
+            },
+            {
+                "id": 1,
+                "text": "test2"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-16T15:05"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [],
+        "shareCode": "aa74e72b-b1ba-4b31-9ee8-8284f95138bf",
+        "adminCode": "ebd1c497-cad8-4321-a9d3-654809296190"
+    },
+    {
+        "title": "a",
+        "description": "a",
+        "options": [
+            {
+                "id": 0,
+                "text": "test1"
+            },
+            {
+                "id": 1,
+                "text": "test2"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-16T15:05"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [],
+        "shareCode": "007befba-b0c1-45ab-b73c-9ea049a87c9c",
+        "adminCode": "c54ad5be-646a-49b9-aa98-f4de62f0910d"
+    },
+    {
+        "title": "asd",
+        "description": "asd",
+        "options": [
+            {
+                "id": 0,
+                "text": "test1"
+            },
+            {
+                "id": 1,
+                "text": "test2"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-16T15:05"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [],
+        "shareCode": "ecdf5384-7c77-4c06-9be6-77cd49312b7c",
+        "adminCode": "9461cf48-fa3d-4b0d-b800-64713ce02be6"
+    },
+    {
+        "title": "Frage 1",
+        "description": "Frage 1",
+        "options": [
+            {
+                "id": 0,
+                "text": "test1"
+            },
+            {
+                "id": 1,
+                "text": "test2"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-20T15:05"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [],
+        "shareCode": "d03c0c09-bccc-4fe7-97e6-dde2cf8a2649",
+        "adminCode": "d3646189-2c6a-475d-a3c3-4a9375ec5776"
+    },
+    {
+        "title": "What is your favorite color?",
+        "description": "By blue are also meant blue-like colors, like turkish.",
+        "options": [
+            {
+                "id": 0,
+                "text": "string"
+            },
+            {
+                "id": 0,
+                "text": "string"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-06-16T15:05"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [],
+        "shareCode": "5682d57d-e2ca-4c48-8f14-f554d658da5c",
+        "adminCode": "f9516cc8-4664-4b99-8fc2-1c5806868374"
+    }
+]
