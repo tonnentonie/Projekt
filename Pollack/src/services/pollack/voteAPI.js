@@ -1,7 +1,8 @@
 import axios from 'axios'
+const url = "http://localhost:49712/vote/lack/"
 
 function createVote(shareToken, name, choice){
-  const response = axios.post('http://localhost:3000/vote/lack/' + shareToken, {
+  const response = axios.post(url + shareToken, {
     owner: {
       name: name
     },
@@ -11,12 +12,12 @@ function createVote(shareToken, name, choice){
 }
 
 function getVote(editToken){
-  const response = axios.get('http://localhost:3000/vote/lack/' + editToken)
+  const response = axios.get(url + editToken)
   return response;
 }
 
 function putVote(editToken, name, choice){
-  const response = axios.put('http://localhost:3000/vote/lack/' + editToken, {
+  const response = axios.put(url + editToken, {
     owner: {
       name: name
     },
@@ -26,7 +27,7 @@ function putVote(editToken, name, choice){
 }
 
 function deleteVote(editToken){
-  const response = axios.delete('http://localhost:3000/vote/lack/' + editToken)
+  const response = axios.delete(url + editToken)
   return response;
 }
 

@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://localhost:5174',
+  origin: 'http://localhost:5173',
   optionsSuccessStatus: 200
 }));
 
@@ -25,7 +25,7 @@ app.use('/vote', vote);
 
 
 // Start Server
-const port = process.env.PORT || 3000; // später ändern zu 49712
+const port = process.env.PORT || 49712; // später ändern zu 49712
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
