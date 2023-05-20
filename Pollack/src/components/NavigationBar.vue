@@ -1,6 +1,10 @@
 <template>
     <div>
         <v-btn
+            @click="router.push('/')">
+            Start
+        </v-btn>
+        <v-btn
             @click="router.push('/pollack/create')">
             <v-icon>mdi-chat-question</v-icon>
             Frage stellen!
@@ -32,7 +36,7 @@ const router = useRouter();
 <style scoped>
 .v-btn{
     height: 3em;
-    width: 25%;
+    width: 20%;
     background-color: #333333;
     color: white;
 }
