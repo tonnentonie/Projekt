@@ -2,14 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 const fs = require('fs');
-const { validate } = require('uuid');
+const signVerify = require('../JWT-token/signVerify');
 
 const userFilePath = './data/users.json';
 
-// POST /user endpoint
+// POST /user endpoint to make a new User
 router.post('/', (req, res) => {
     // Get data from the request body
     const { name, password } = req.body;
+
+    console.log("POST User lock" + req.body);
+
 
     // Check if all required fields are present in the request body
     if (!name || !password) {
@@ -18,7 +21,19 @@ router.post('/', (req, res) => {
 
     // Read the existing users from the file
     const users = JSON.parse(fs.readFileSync(userFilePath));
-    const apiKey = "123"
+    let apiKey = "123";
+
+    
+    for (let index = 0; index < users.length; index++) {
+        const element = users[index];
+        if (element.name === name) {
+            return res.status(406).json({ code: 406, message: "user already exists" });
+        }
+
+    }
+
+    apiKey = signVerify.sign(req.body);    
+
 
     // Add the new user object
     users.push({
@@ -30,137 +45,113 @@ router.post('/', (req, res) => {
     // Write the updated user and votes back to the files
     fs.writeFileSync(userFilePath, JSON.stringify(users));
 
-    // Create response object
-    const response = {
-        apiKey
-    };
-
     // Send response
-    res.status(200).json(response);
+    res.status(200).json(apiKey);
 });
 
-router.post('/user/key', (req, res) => {
+router.post('/key', (req, res) => {
 
-    return router.post('/user');
-
-
-});
-
-// GET /poll/lack/:token endpoint to get the poll details
-router.get('/lack/:token', (req, res) => {
-    // Get token from the URL parameters
-    const token = req.params.token;
-
-    // Lese die polls.json Datei ein
-    const pollData = JSON.parse(fs.readFileSync(pollFilePath));
-
-    // Finde den Index des entsprechenden shareCode in dem Array
-    const pollIndex = pollData.findIndex((poll) => poll.shareCode === token);
-
-    if (pollIndex === -1) {
-        return res.status(404).json({
-          code: 404,
-          message: "Poll not found."
-        });
-    }else{
-        // Überprüfe ob die Deadline erreicht wurde
-        const deadline = new Date(pollData[pollIndex].setting.deadline);
-        if(deadline < Date.now()){
-            return res.status(410).json({ code: 410, message: "Poll is gone." });
-        }else{
-            // Erstelle ein neues Objekt mit den Daten des Polls
-
-            //Fehlende Funktionalität:
-            //const participants = pollData[pollIndex]
-            //const voted = pollData[pollIndex].votes
-
-            const poll = 
-            {
-                body:{
-                    title: pollData[pollIndex].title,
-                    description: pollData[pollIndex].description,
-                    options: pollData[pollIndex].options,
-                    setting: pollData[pollIndex].setting,
-                    fixed: pollData[pollIndex].fixed,
-                    share: {
-                        link: `https://localhost:3000/poll/${pollData[pollIndex].shareCode}`,
-                        value: pollData[pollIndex].shareCode
-                        }
-            },
-                participants: [],
-                options: []
-            };
-
-            // Sende das Objekt als JSON
-            return res.status(200).json(poll);
-        }
-    }
-});
-
-// PUT /poll/lack/:token endpoint to update the poll
-router.put('/lack/:token', (req, res) => {
     // Get data from the request body
-    const { title, description, options, setting, fixed } = req.body;
-    const token = req.params.token;
+    const { name, password } = req.body;
+
+    console.log("POST User Key" + req.body);
+
 
     // Check if all required fields are present in the request body
-    if (!title || !options || !setting || !fixed) {
+    if (!name || !password) {
         return res.status(405).json({ code: 405, message: "Invalid input" });
     }
 
-    // Lese die polls.json Datei ein
-    const pollData = JSON.parse(fs.readFileSync(pollFilePath));
 
-    // Finde den Index des entsprechenden adminCode in dem Array
-    const pollIndex = pollData.findIndex((poll) => poll.adminCode === token);
+    // Read the existing users from the file
+    const users = JSON.parse(fs.readFileSync(userFilePath));
+    let apiKey = "";
 
-    if (pollIndex === -1) {
-        return res.status(404).json({ code: 404, message: "Poll not found" });
-    }else{
-        // Aktualisieren des Eintrags mit den Eigenschaften im Request Body
-        const updatedPoll = {
-            ...pollData[pollIndex],
-            title: title,
-            description: description,
-            options: options,
-            setting: setting,
-            fixed: fixed
+
+
+    for (let index = 0; index < users.length; index++) {
+        const element = users[index];
+        if (element.name === name && element.password === password) {
+            apiKey = signVerify.sign(req.body);            
+        }else{
+            return res.status(406).json({ code: 406, message: "User and/or password wrong" });
+        }
+
+    }
+
+    //console.log(signVerify.verifyTest(apiKey,res));
+
+    // Send response
+    res.status(200).json(apiKey);
+
+
+});
+
+// GET /user/:name endpoint to get the User
+router.get('/:name', signVerify.verify, (req, res) => {
+
+
+    // Get name from the URL parameters
+    const name = req.params.name;
+
+    // Lese die users.json Datei ein
+    const users = JSON.parse(fs.readFileSync(userFilePath));
+
+    // Finde den Index des entsprechenden Users in dem Array
+    const usersIndex = users.findIndex((users) => users.name === name);
+
+    if (usersIndex === -1) {
+        return res.status(404).json({
+            code: 404,
+            message: "User not found."
+        });
+    } else {
+
+        const user =
+        {
+
+            name: users[usersIndex].name,
+            lock: true
+
         };
-        
-        // Zurückschreiben des aktualisierten Eintrags in die Datei
-        pollData[pollIndex] = updatedPoll;
-        fs.writeFileSync(pollFilePath, JSON.stringify(pollData));
-        
-        return res.status(200).json({ code: 200, message: "i. O." });    
+
+        // Sende das Objekt als JSON
+        return res.status(200).json(user);
+
     }
 });
 
-// DELETE /poll/lack/:token endpoint to delete the poll
-router.delete('/lack/:token', (req, res) => {
+
+// DELETE /user/:name endpoint to delete the user
+//Only when logged in
+router.delete('/:name', signVerify.verify, (req, res) => {
+
+
     // Get data from the request body
-    const token = req.params.token;
+    const name = req.params.name;
 
-    if (!validate(token)) {
-        return res.status(400).json({ code: 400, message: "Invalid poll admin token." });    
-    }else{
-        // Lese die polls.json Datei ein
-        const pollData = JSON.parse(fs.readFileSync(pollFilePath));
 
-        // Finde den Index des entsprechenden adminCode in dem Array
-        const pollIndex = pollData.findIndex((poll) => poll.adminCode === token);
+    // Lese die polls.json Datei ein
+    const users = JSON.parse(fs.readFileSync(userFilePath));
 
-        if (pollIndex === -1) {
-            return res.status(404).json({ code: 404, message: "Poll not found" });
-        }else{
-            // Remove the poll from the polls array
-            pollData.splice(pollIndex, 1);
-            
-            // Zurückschreiben des aktualisierten Eintrags in die Datei
-            fs.writeFileSync(pollFilePath, JSON.stringify(pollData));
-            
-            return res.status(200).json({ code: 200, message: "i. O." });    
-        }
+    // Finde den Index des entsprechenden adminCode in dem Array
+    const usersIndex = users.findIndex((users) => users.name === name);
+
+    if (usersIndex === -1) {
+        return res.status(404).json({ code: 404, message: "User not found" });
+    } else {
+
+
+
+        // Remove the poll from the polls array
+        users.splice(usersIndex, 1);
+
+        // Zurückschreiben des aktualisierten Eintrags in die Datei
+        fs.writeFileSync(userFilePath, JSON.stringify(users));
+
+        return res.status(200).json({ code: 200, message: "Delete successful" });
     }
+
 });
 
 module.exports = router;

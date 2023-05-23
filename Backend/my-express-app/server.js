@@ -26,7 +26,13 @@ const vote = require('./routes/vote');
 app.use('/vote', vote);
 
 const user = require('./routes/user');
-app.use('/user', user); 
+app.use('/user', user);
+
+const polllock = require('./routes/pollock/poll');
+app.use('/poll', polllock);
+
+const votelock = require('./routes/pollock/vote');
+app.use('/vote', votelock);
 
 
 

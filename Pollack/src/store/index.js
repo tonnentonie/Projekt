@@ -2,6 +2,7 @@ import { reactive } from "vue";
 import pollack from "../services/pollackApi"
 import pollackApi from "../services/pollackApi";
 import pollock from "../services/pollockApi";
+import user from "../services/pollock/userAPI";
 
 
 const state = reactive({
@@ -73,5 +74,6 @@ export default{
     state,
     methods,
     pollack,
-    pollock
+    pollock,
+    user
 }
