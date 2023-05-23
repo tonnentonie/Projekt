@@ -251,5 +251,162 @@
         "votes": [],
         "shareCode": "5682d57d-e2ca-4c48-8f14-f554d658da5c",
         "adminCode": "f9516cc8-4664-4b99-8fc2-1c5806868374"
+    },
+    {
+        "title": "What is your favorite color?",
+        "description": "By blue are also meant blue-like colors, like turkish.",
+        "options": [
+            {
+                "id": 0,
+                "text": "string"
+            },
+            {
+                "id": 0,
+                "text": "string"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-29T19:21:39+02:00"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [],
+        "shareCode": "5709c405-89e1-4696-8d24-073e5ff9e6c5",
+        "adminCode": "bd47b37e-a587-4dbf-a308-fd837d0301c3"
+    },
+    {
+        "title": "What is your favorite color?",
+        "description": "By blue are also meant blue-like colors, like turkish.",
+        "options": [
+            {
+                "id": 0,
+                "text": "string"
+            },
+            {
+                "id": 0,
+                "text": "string"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-29T19:21:39+02:00"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [],
+        "shareCode": "601f6df0-9f4f-477f-bde5-b944365ef41a",
+        "adminCode": "6f9de5e1-8213-4227-8ef5-6a53a876eff8"
+    },
+    {
+        "title": "What is your favorite color?",
+        "description": "By blue are also meant blue-like colors, like turkish.",
+        "options": [
+            {
+                "id": 0,
+                "text": "string"
+            },
+            {
+                "id": 0,
+                "text": "string"
+            }
+        ],
+        "setting": {
+            "voices": 1,
+            "worst": false,
+            "deadline": "2023-05-29T19:21:39+02:00"
+        },
+        "fixed": [
+            0
+        ],
+        "votes": [
+            {
+                "owner": {
+                    "name": "string",
+                    "lock": true
+                },
+                "choice": [
+                    {
+                        "id": 1,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-22T23:40:24.892Z",
+                "editCode": "befb0f40-32b5-4e20-8d39-4c8ac504adb7"
+            },
+            {
+                "owner": {
+                    "name": "string",
+                    "lock": true
+                },
+                "choice": [
+                    {
+                        "id": 1,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-22T23:40:59.274Z",
+                "editCode": "31c87314-878d-4727-baaf-416910f9a3d7"
+            },
+            {
+                "owner": {
+                    "name": "string",
+                    "lock": true
+                },
+                "choice": [
+                    {
+                        "id": 1,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-22T23:41:24.624Z",
+                "editCode": "d1b4beb7-f76e-433e-bf48-caf4dcc1c2a6"
+            },
+            {
+                "owner": {
+                    "name": "string",
+                    "lock": true
+                },
+                "choice": [
+                    {
+                        "id": 1,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-22T23:42:31.552Z",
+                "editCode": "abdbb697-8fa8-42f6-a84a-694e75e4a047"
+            },
+            {
+                "owner": {
+                    "name": "string",
+                    "lock": true
+                },
+                "choice": [
+                    {
+                        "id": 1,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-22T23:42:49.849Z",
+                "editCode": "4fbb71ac-ed3e-473d-8eb1-ba4a7fe5d323"
+            }
+        ],
+        "shareCode": "782c21eb-457f-470b-a84c-203ce63fa913",
+        "adminCode": "a0b37e75-65e2-4418-bb54-42899ea3547d",
+        "owner": {
+            "name": "string",
+            "lock": true
+        },
+        "users": [
+            {
+                "name": "string",
+                "lock": true
+            }
+        ],
+        "visibility": "lock"
     }
 ]

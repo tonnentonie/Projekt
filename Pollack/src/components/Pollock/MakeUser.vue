@@ -33,12 +33,14 @@ const name = ref('');
 const password = ref('');
 
 function einrichten() {
+    //console.log("Name: "+name);
     console.log(name);
     console.log(password);
-    const status = store.pollock.user(name, password);
+
+    const status = store.user.createUser(name, password);
     console.log(status.value);
     if(status != 200){
-        router.push('/pollack/error')
+        router.push('/pollock/error')
     }
 
    
