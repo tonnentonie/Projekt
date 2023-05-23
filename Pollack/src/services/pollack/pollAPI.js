@@ -1,5 +1,5 @@
 import axios from 'axios'
-const url = "http://localhost:49712/poll/lack/"
+const url = "http://localhost:12/poll/lack/"
 
 function createPoll(titel, description, options, settings, fixed){
     const response = axios.post(url, {

@@ -32,7 +32,7 @@ const router = createRouter({
         { path: 'error', component: ErrorCard, meta: { requiresAuth: false }},
         { path: 'poll/:token', component: PollCard, meta: { requiresAuth: false }},
         { path: 'admin/:token', component: AdminCard, meta: { requiresAuth: false }},
-        { path: 'answer/:token', component: AnswerCard, meta: { requiresAuth: false }},
+        { path: 'vote/:token', component: AnswerCard, meta: { requiresAuth: false }},
       ]},
       { path: '/pollock', component: Pollock, redirect: { path: 'pollock/login' }, meta: { requiresAuth: false }, children: [
         { path: 'register', component: Register, meta: { requiresAuth: false }},
@@ -43,7 +43,7 @@ const router = createRouter({
         { path: 'error', component: ErrorCard, meta: { requiresAuth: false }},
         { path: 'poll/:token', component: PollCard, meta: { requiresAuth: false }},
         { path: 'admin/:token', component: AdminCard, meta: { requiresAuth: false }},
-        { path: 'answer/:token', component: AnswerCard, meta: { requiresAuth: false }},
+        { path: 'vote/:token', component: AnswerCard, meta: { requiresAuth: false }},
       ]},
       { path: '/:notFound(.*)', component: StartPage,redirect: { path: '' }, meta: { requiresAuth: false }}
     ]

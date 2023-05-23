@@ -11,7 +11,6 @@ const pollFilePath = './data/polls.json';
 // POST /poll/lack endpoint to create a new poll
 router.post('/lack', (req, res) => {
     // Get data from the request body
-    console.log("POST Poll lack");
     const { title, description, options, setting, fixed } = req.body;
 
     // Check if all required fields are present in the request body
@@ -45,11 +44,11 @@ router.post('/lack', (req, res) => {
     // Create response object
     const response = {
         admin: {
-        link: `https://localhost:3000/poll/${adminCode}`,
+        link: `localhost:49712/pollack/admin/${adminCode}`,
         value: adminCode
         },
         share: {
-        link: `https://localhost:3000/poll/${shareCode}`,
+        link: `localhost:49712/pollack/poll/${shareCode}`,
         value: shareCode
         }
     };
@@ -95,7 +94,7 @@ router.get('/lack/:token', (req, res) => {
                     setting: pollData[pollIndex].setting,
                     fixed: pollData[pollIndex].fixed,
                     share: {
-                        link: `https://localhost:3000/poll/${pollData[pollIndex].shareCode}`,
+                        link: `localhost:49712/pollack/poll/${pollData[pollIndex].shareCode}`,
                         value: pollData[pollIndex].shareCode
                         }
             },

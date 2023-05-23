@@ -74,7 +74,7 @@ router.post('/lack/:token', (req, res) => {
             // Sende eine Erfolgsmeldung zurück
             res.status(200).json({
                 edit: {
-                link: `https://localhost:3000/vote/${editCode}`,
+                link: `localhost:49712/pollack/vote/${editCode}`,
                 value: editCode
                 }
             });
@@ -123,7 +123,7 @@ router.get('/lack/:token', (req, res) => {
                         fixed: pollData[pollIndex].fixed,
                     },
                     share: {
-                        link: `https://localhost:3000/poll/${pollData[pollIndex].shareCode}`,
+                        link: `localhost:49712/pollack/vote/${pollData[pollIndex].shareCode}`,
                         value: pollData[pollIndex].shareCode
                     }
                 },

@@ -3,19 +3,24 @@
     <v-card>
         <v-text-field 
             clearable 
-            label="Token eingeben:" 
+            label="ShareToken eingeben:" 
             variant="outlined" 
-            v-model="token">
+            v-model="shareToken">
         </v-text-field>
-        <v-card-actions>
-            <v-switch
-                v-model="toggle"
-                :label="toggle?'AdminToken':'ShareToken'"
-            ></v-switch>
-            <v-btn @click="openPoll()" variant="outlined">
+        <v-btn @click="openPoll()" variant="outlined">
                 Umfrage öffnen!
-            </v-btn>
-        </v-card-actions>
+        </v-btn>
+        
+        <v-text-field 
+            clearable 
+            label="EditToken eingeben:" 
+            variant="outlined" 
+            v-model="editToken">
+        </v-text-field>
+        <v-btn @click="editVote()" variant="outlined">
+                Vote bearbeiten!
+        </v-btn>
+
     </v-card>
 </template>
 
@@ -25,27 +30,16 @@ import { useRouter } from 'vue-router';
 import store from "../store";
 const router = useRouter();
 
-const toggle = ref(false);
-const token = ref('');
+const shareToken = ref('');
+const adminToken = ref('');
+const editToken = ref('');
 
-async function openPoll(){
-    if(!toggle.value){
-        if(token.value != ''){
-            console.log(await store.methods.getPoll(token.value))
-            if(store.state.error != null){
-                router.push(`/pollack/error`)
-            }else{
-                router.push(`/pollack/poll/${token.value}`)
-            }
-        }
-    }
-    else{
-        if(token.value != ''){
-            router.push(`/pollack/admin/${token.value}`)
-        }
-        
-    }
-}   
+function openPoll(){
+    router.push(`/pollack/poll/${shareToken.value}`)
+} 
+function editVote(){
+    router.push(`/pollack/edit/${editToken.value}`)
+}
 
 </script>
   
@@ -56,6 +50,12 @@ async function openPoll(){
     margin: 5em auto;
     padding: 1em;
     width: 60%;
+}
+.v-btn{
+    margin-bottom: 1em;
+}
+.v-btn:hover{
+    background-color: lavender;
 }
 </style>
   

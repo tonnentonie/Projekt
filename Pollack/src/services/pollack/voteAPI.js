@@ -1,5 +1,5 @@
 import axios from 'axios'
-const url = "http://localhost:49712/vote/lack/"
+const url = "http://localhost:12/vote/lack/"
 
 function createVote(shareToken, name, choice){
   const response = axios.post(url + shareToken, {

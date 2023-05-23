@@ -64,12 +64,16 @@
         </v-card-actions>
     </v-card>
     <v-card class="TokenCard" v-if="showToken">
-        <v-text-field 
-            readonly 
-            label="ShareToken:" 
-            variant="outlined" 
-            v-model="store.state.question.share.value">
-        </v-text-field>
+        <p>Speichere diese Token unbedingt ab um weiterhin auf deine Umfrage zugreifen zu können!</p>
+        <div>
+            <v-text-field 
+              readonly 
+              label="ShareToken:" 
+              variant="outlined" 
+              v-model="store.state.question.share.value">
+            </v-text-field>
+          </div>
+  
         <v-text-field 
             readonly 
             label="AdminToken:" 
@@ -106,7 +110,7 @@ const expiryTickLabels =  {
 var expiryModel = ref(0)
 
 function getExpiryDate() {
-  const currentDate = new Date();
+  var currentDate = new Date();
 
   switch (expiryModel.value) {
     case 10:
@@ -205,11 +209,20 @@ function optionTickLabels(){
     return tickLabels
 }
 
+function getVotesModel(){
+  if(filledOptions.value.length > 2){
+      votesModel.value++
+      if(votesModel.value > filledOptions.value.length){
+        votesModel.value = filledOptions.value.length
+      }
+    }
+    return votesModel.value
+}
+
 async function sendQuestion() {
-    question.setting.votes = votesModel.value + 1
+    question.setting.votes = getVotesModel()
     question.setting.deadline = getExpiryDate()
     const response = await store.methods.postPoll(question);
-    console.log(response)
     if(response != 200){
         router.push('/pollack/error')
     }
