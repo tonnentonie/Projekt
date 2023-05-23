@@ -10,7 +10,7 @@ import HomePage from '../pages/HomePage.vue'
 
 //Components
 import Login from '../components/Pollock/Login.vue'
-import MakeUser from '../components/Pollock/MakeUser.vue'
+import Register from '../components/Pollock/Register.vue'
 
 import PollCard from '../components/PollCard.vue'
 import CreatePoll from '../components/CreatePoll.vue'
@@ -25,7 +25,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
       { path: '/', component: StartPage, meta: { requiresAuth: false }},
-      { path: '/Pollack', component: Pollack, redirect: { path: 'Pollack/home' }, meta: { requiresAuth: false}, children: [
+      { path: '/pollack', component: Pollack, redirect: { path: 'pollack/home' }, meta: { requiresAuth: false}, children: [
         { path: 'home', component: HomePage, meta: { requiresAuth: false }},
         { path: 'create', component: CreatePoll, meta: { requiresAuth: false }},
         { path: 'search', component: SearchPoll, meta: { requiresAuth: false }},
@@ -34,8 +34,8 @@ const router = createRouter({
         { path: 'admin/:token', component: AdminCard, meta: { requiresAuth: false }},
         { path: 'answer/:token', component: AnswerCard, meta: { requiresAuth: false }},
       ]},
-      { path: '/Pollock', component: Pollock, redirect: { path: 'Pollock/login' }, meta: { requiresAuth: false }, children: [
-        { path: 'makeuser', component: MakeUser, meta: { requiresAuth: false }},
+      { path: '/pollock', component: Pollock, redirect: { path: 'pollock/login' }, meta: { requiresAuth: false }, children: [
+        { path: 'register', component: Register, meta: { requiresAuth: false }},
         { path: 'login', component: Login, meta: { requiresAuth: false }},
         { path: 'home', component: HomePage, meta: { requiresAuth: false }},
         { path: 'create', component: CreatePoll, meta: { requiresAuth: false }},

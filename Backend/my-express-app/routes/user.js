@@ -1,15 +1,13 @@
-const e = require('express');
 const express = require('express');
 const router = express.Router();
 
 const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
 const { validate } = require('uuid');
 
 const userFilePath = './data/users.json';
 
-// POST /user endpoint to create a new poll
-router.post('/user', (req, res) => {
+// POST /user endpoint
+router.post('/', (req, res) => {
     // Get data from the request body
     const { name, password } = req.body;
 
@@ -17,7 +15,6 @@ router.post('/user', (req, res) => {
     if (!name || !password) {
         return res.status(405).json({ code: 405, message: "Invalid input" });
     }
-    
 
     // Read the existing users from the file
     const users = JSON.parse(fs.readFileSync(userFilePath));

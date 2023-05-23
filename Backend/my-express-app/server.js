@@ -7,12 +7,15 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://localhost:5173',
-  optionsSuccessStatus: 200
+  origin: 'http://localhost:49713',
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
 // Routes
-app.get('/', (_, res) => {
+app.get('/test', (_, res) => {
   res.send('Willkommen in der Pollack REST-API!');
 });
 
@@ -21,6 +24,9 @@ app.use('/poll', poll);
 
 const vote = require('./routes/vote');
 app.use('/vote', vote);
+
+const user = require('./routes/user');
+app.use('/user', user); 
 
 
 

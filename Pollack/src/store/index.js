@@ -14,31 +14,23 @@ const state = reactive({
         share: null,
         admin: null,
     },
-    error: null,
-    dialog: true,
+    error: null
 })
 
 const methods = {
-    createQuestions(test){
-        pollackApi.poll.createPoll(test, test, 'test1', 'test2');
-    },
-    getDialogStatus(){
-        return state.dialog;
-    },
-    setDialogStatus(status){
-        state.dialog = status;
-    },
-    async postPoll(question, desc){
+    async postPoll(question){
         const filledOptions = question.options.filter((option) => option.trim() !== '');
         const options = [];
         filledOptions.map((option, i) => {
             options.push({id: i, title: option});
         });
-        const response = await pollackApi.poll.createPoll(question.title, question.description, options, question.setting, question.fixed);
+        const response = await pollackApi.poll.requests.createPoll(question.title, question.description, options, question.setting, question.fixed);
         if(response.status == 200){
+            console.log(response.data)
             state.error = null
-            state.question.share = response.data.body.share
-            state.question.admin = response.data.body.admin
+            state.question.share = response.data.share
+            state.question.admin = response.data.admin
+            console.log(state.question.share)
             return response.status
         }else{
             console.log(response.data.message)
@@ -57,12 +49,10 @@ const methods = {
             state.question.setting = response.data.body.setting
             state.question.fixed = response.data.body.fixed
             state.question.share = response.data.body.share
-            state.question.admin = response.data.body.admin
             return 200
         }else{
-            console.log(response.data)
             state.error = response.data.message
-            return 404
+            return response.status
         }
     },
     async putPoll(adminToken, question){

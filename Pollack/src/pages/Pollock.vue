@@ -14,8 +14,8 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 function showNavBar() {
-  // Hide NavigationBar for HomePage
-  return router.currentRoute.value.fullPath != '/Pollack/home'
+  // Hide NavigationBar for HomePage, LoginPage and RegisterPage
+  return router.currentRoute.value.fullPath != '/pollock/home' && router.currentRoute.value.fullPath != '/pollock/login' && router.currentRoute.value.fullPath != '/pollock/register'
 }
 
 function login (){

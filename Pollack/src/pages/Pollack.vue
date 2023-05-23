@@ -13,7 +13,7 @@ const router = useRouter();
 
 function showNavBar() {
   // Hide NavigationBar for HomePage
-  return router.currentRoute.value.fullPath != '/Pollack/home'
+  return router.currentRoute.value.fullPath != '/pollack/home'
 }
 
 </script>

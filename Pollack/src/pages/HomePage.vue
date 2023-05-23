@@ -58,9 +58,9 @@ const router = useRouter();
 .v-card {
     background-color: white;
     width: 500px;
-    height: 450px;
+    height: 500px;
     margin: auto;
-    padding-top: 2%;
+    padding-top: 4em;
 }
     
 .v-btn {

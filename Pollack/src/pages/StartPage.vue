@@ -44,16 +44,14 @@ const router = useRouter();
 .v-card {
     background-color: white;
     width: 500px;
-    height: 450px;
+    height: 500px;
     margin: auto;
+    padding-top: 7em;
 }
     
 .v-btn {
     width: 200px;
     margin: 20px;
-}
-h1{
-    margin-top: 4em;
 }
 
 /* Mobile App Design */
