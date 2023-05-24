@@ -6,6 +6,7 @@ import Pollack from '../pages/Pollack.vue'
 import Pollock from '../pages/Pollock.vue'
 import StartPage from '../pages/StartPage.vue'
 import HomePage from '../pages/HomePage.vue'
+import HomePageLock from '../pages/HomePageLock.vue'
 
 
 //Components
@@ -35,7 +36,7 @@ const router = createRouter({
       { path: '/pollock', component: Pollock, redirect: { path: 'pollock/login' }, meta: { requiresAuth: false }, children: [
         { path: 'register', component: Register, meta: { requiresAuth: false }},
         { path: 'login', component: Login, meta: { requiresAuth: false }},
-        { path: 'home', component: HomePage, meta: { requiresAuth: false }},
+        { path: 'home', component: HomePageLock, meta: { requiresAuth: false }},
         { path: 'create', component: CreatePoll, meta: { requiresAuth: false }},
         { path: 'search', component: SearchPoll, meta: { requiresAuth: false }},
         { path: 'error', component: ErrorCard, meta: { requiresAuth: false }},

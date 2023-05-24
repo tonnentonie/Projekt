@@ -1,14 +1,18 @@
 <template>
-     <div id="Pollack">
-        <NavigationBar v-if="showNavBar()"></NavigationBar>
-        <router-view></router-view>
-    </div>
+  <div id="Pollack">
+    <NavigationBarLock v-if="showNavBar()"></NavigationBarLock>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script setup>
 import PollCard from '../components/PollCard.vue'
-import NavigationBar from '../components/NavigationBar.vue';
+import NavigationBarLock from '../components/Pollock/NavigationBarLock.vue';
 import { useRouter } from 'vue-router';
+import store from '../store';
+import { onBeforeUpdate } from 'vue';
+import axios from 'axios';
+
 
 
 const router = useRouter();
@@ -18,7 +22,30 @@ function showNavBar() {
   return router.currentRoute.value.fullPath != '/pollock/home' && router.currentRoute.value.fullPath != '/pollock/login' && router.currentRoute.value.fullPath != '/pollock/register'
 }
 
-function login (){
+
+
+onBeforeUpdate(() => {
+  autolog()
+})
+
+//Loggt den User automatisch aus, wenn die Credentials nicht mehr stimmen
+async function autolog() {
+  //console.log("autologTest1")
+  if (localStorage.getItem('apiToken') == null || localStorage.getItem('name') == null) {
+    router.push('/pollock/login')
+  }
+  //console.log("test2")
+  try {
+    axios.defaults.headers.common['api_key'] = localStorage.getItem('apiToken');
+    const res = await store.user.getUser(localStorage.getItem('name'));
+    //console.log("test3" + res.data)
+  } catch (error) {
+
+    router.push('/pollock/login')
+
+  }
+
+
 
 
 }
@@ -27,6 +54,4 @@ function login (){
 
 
 
-<style scoped>
-
-</style>
+<style scoped></style>

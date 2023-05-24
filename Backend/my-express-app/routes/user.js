@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
     const users = JSON.parse(fs.readFileSync(userFilePath));
     let apiKey = "123";
 
-    
+
     for (let index = 0; index < users.length; index++) {
         const element = users[index];
         if (element.name === name) {
@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 
     }
 
-    apiKey = signVerify.sign(req.body);    
+    apiKey = signVerify.sign(req.body);
 
 
     // Add the new user object
@@ -61,29 +61,30 @@ router.post('/key', (req, res) => {
     if (!name || !password) {
         return res.status(405).json({ code: 405, message: "Invalid input" });
     }
+    //console.log("test1" + req.body);
 
 
     // Read the existing users from the file
     const users = JSON.parse(fs.readFileSync(userFilePath));
     let apiKey = "";
 
+    let bool = true;
 
-
-    for (let index = 0; index < users.length; index++) {
+    for (let index = 0; index < users.length && bool; index++) {
         const element = users[index];
+        //console.log(element.name + " test " + element.password);
         if (element.name === name && element.password === password) {
-            apiKey = signVerify.sign(req.body);            
-        }else{
-            return res.status(406).json({ code: 406, message: "User and/or password wrong" });
-        }
+            apiKey = signVerify.sign(req.body);
+            return res.status(200).json(apiKey);
+            bool = false;
+        } 
 
     }
 
     //console.log(signVerify.verifyTest(apiKey,res));
 
     // Send response
-    res.status(200).json(apiKey);
-
+    return res.status(406).json({ code: 406, message: "User and/or password wrong" });
 
 });
 
