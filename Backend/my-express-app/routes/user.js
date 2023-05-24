@@ -72,7 +72,7 @@ router.post('/key', (req, res) => {
 
     for (let index = 0; index < users.length && bool; index++) {
         const element = users[index];
-        console.log(element.name + " test " + element.password);
+        //console.log(element.name + " test " + element.password);
         if (element.name === name && element.password === password) {
             apiKey = signVerify.sign(req.body);
             return res.status(200).json(apiKey);
