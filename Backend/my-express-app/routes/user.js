@@ -24,8 +24,8 @@ router.post('/', (req, res) => {
     let apiKey = "123";
 
 
-    for (let index = 0; index < users.length; index++) {
-        const element = users[index];
+    for (let index = 0; index < users.pollock.length; index++) {
+        const element = users.pollock[index];
         if (element.name === name) {
             return res.status(406).json({ code: 406, message: "user already exists" });
         }
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 
 
     // Add the new user object
-    users.push({
+    users.pollock.push({
         name,
         password,
     });
@@ -70,8 +70,8 @@ router.post('/key', (req, res) => {
 
     let bool = true;
 
-    for (let index = 0; index < users.length && bool; index++) {
-        const element = users[index];
+    for (let index = 0; index < users.pollock.length && bool; index++) {
+        const element = users.pollock[index];
         //console.log(element.name + " test " + element.password);
         if (element.name === name && element.password === password) {
             apiKey = signVerify.sign(req.body);
@@ -99,7 +99,7 @@ router.get('/:name', signVerify.verify, (req, res) => {
     const users = JSON.parse(fs.readFileSync(userFilePath));
 
     // Finde den Index des entsprechenden Users in dem Array
-    const usersIndex = users.findIndex((users) => users.name === name);
+    const usersIndex = users.pollock.findIndex((users) => users.name === name);
 
     if (usersIndex === -1) {
         return res.status(404).json({
@@ -111,7 +111,7 @@ router.get('/:name', signVerify.verify, (req, res) => {
         const user =
         {
 
-            name: users[usersIndex].name,
+            name: users.pollock[usersIndex].name,
             lock: true
 
         };
@@ -136,7 +136,7 @@ router.delete('/:name', signVerify.verify, (req, res) => {
     const users = JSON.parse(fs.readFileSync(userFilePath));
 
     // Finde den Index des entsprechenden adminCode in dem Array
-    const usersIndex = users.findIndex((users) => users.name === name);
+    const usersIndex = users.pollock.findIndex((users) => users.name === name);
 
     if (usersIndex === -1) {
         return res.status(404).json({ code: 404, message: "User not found" });
@@ -144,8 +144,8 @@ router.delete('/:name', signVerify.verify, (req, res) => {
 
 
 
-        // Remove the poll from the polls array
-        users.splice(usersIndex, 1);
+        // Remove the user from the pollock users array
+        users.pollock.splice(usersIndex, 1);
 
         // Zurückschreiben des aktualisierten Eintrags in die Datei
         fs.writeFileSync(userFilePath, JSON.stringify(users));
