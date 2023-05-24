@@ -15,7 +15,6 @@ import Register from '../components/Pollock/Register.vue'
 import PollCard from '../components/PollCard.vue'
 import CreatePoll from '../components/CreatePoll.vue'
 import SearchPoll from '../components/SearchPoll.vue'
-import AdminCard from '../components/AdminCard.vue'
 import AnswerCard from '../components/AnswerCard.vue'
 import ErrorCard from '../components/ErrorCard.vue'
 
@@ -31,7 +30,6 @@ const router = createRouter({
         { path: 'search', component: SearchPoll, meta: { requiresAuth: false }},
         { path: 'error', component: ErrorCard, meta: { requiresAuth: false }},
         { path: 'poll/:token', component: PollCard, meta: { requiresAuth: false }},
-        { path: 'admin/:token', component: AdminCard, meta: { requiresAuth: false }},
         { path: 'vote/:token', component: AnswerCard, meta: { requiresAuth: false }},
       ]},
       { path: '/pollock', component: Pollock, redirect: { path: 'pollock/login' }, meta: { requiresAuth: false }, children: [
@@ -42,7 +40,6 @@ const router = createRouter({
         { path: 'search', component: SearchPoll, meta: { requiresAuth: false }},
         { path: 'error', component: ErrorCard, meta: { requiresAuth: false }},
         { path: 'poll/:token', component: PollCard, meta: { requiresAuth: false }},
-        { path: 'admin/:token', component: AdminCard, meta: { requiresAuth: false }},
         { path: 'vote/:token', component: AnswerCard, meta: { requiresAuth: false }},
       ]},
       { path: '/:notFound(.*)', component: StartPage,redirect: { path: '' }, meta: { requiresAuth: false }}

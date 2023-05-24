@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="!editPollBool">
+  <v-card v-if="Poll">
     <v-text-field clearable label="Dein Name:" variant="outlined" v-model="name">
     </v-text-field>
     <v-text-field id="question" readonly label="Frage:"
@@ -14,24 +14,60 @@
       <v-text-field readonly hide-details :label="`Option ${i + 1}:`" variant="outlined"
         v-model="option.title"></v-text-field>
     </div>
-
     <v-card-actions>
-      <v-btn @click="sendAnswer()" variant="outlined">
-        Jetzt Abstimmen!
-      </v-btn>
-      <v-btn id="admin" @click="showAdminInput = !showAdminInput" variant="outlined">
+      <v-btn id="admin" @click="showEdit()" variant="outlined">
         Umfrage bearbeiten
       </v-btn>
-    </v-card-actions>
-    <div id="adminPanel" v-if="showAdminInput">
-      <v-text-field clearable hint="Bitte gebe den AdminToken ein um die Umfrage zu bearbeiten." persistent-hint
-        label="AdminToken:" variant="outlined" v-model="adminToken"></v-text-field>
-      <v-btn @click="switchEditPoll()" variant="outlined">
-        Umfrage jetzt bearbeiten!
+      <v-btn id="vote" @click="sendAnswer()" variant="outlined">
+        Jetzt Abstimmen!
       </v-btn>
-    </div>
+      <v-dialog
+          v-model="voteDialog"
+          width="75%"
+          height="50%"
+        >
+          <v-card>
+            <v-text-field 
+              readonly 
+              hint="Speichere diesen EditToken um deinen Vote später noch zu bearbeiten." persistent-hint
+              label="EditToken:" 
+              variant="outlined" 
+              v-model="store.state.vote.edit.value">
+            </v-text-field>
+            <v-card-actions>
+              <v-btn variant="outlined" block @click="voteDialog = false">Dialog schließen</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+    </v-card-actions>
+    <v-btn id="result" block @click="showResult()" variant="outlined">
+        Ergebnis anzeigen
+    </v-btn>
   </v-card>
-  <v-card class="editPoll" v-if="editPollBool">
+
+
+
+  <v-card class="editPoll" v-if="Edit">
+    <v-btn
+      id="delete" variant="outlined" icon="mdi-delete"
+    >
+      <v-icon>mdi-delete</v-icon>
+      <v-dialog
+        v-model="deleteDialog"
+        activator="parent"
+        width="75%"
+        height="50%"
+      >
+        <v-card>
+          <v-text-field clearable hint="Bitte gebe den AdminToken ein um das löschen der Umfrage zu bestätigen." persistent-hint
+              label="AdminToken:" variant="outlined" v-model="adminTokenDelete">
+          </v-text-field>
+          <v-card-actions>
+            <v-btn variant="outlined" block @click="deletePoll()">Umfrage löschen</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-btn>
     <v-text-field clearable label="Frage:" variant="outlined" v-model="question.title">
     </v-text-field>
     <v-switch v-model="description" :label="`Beschreibung hinzufügen (${description})`"></v-switch>
@@ -53,12 +89,6 @@
       <v-slider v-model="expiryModel" :ticks="expiryTickLabels" :max="11" step="1" show-ticks="always"
         tick-size="4">
       </v-slider>
-      <v-btn id="DeletePoll" @click="deletePoll()" variant="outlined">
-        Umfrage löschen!
-      </v-btn>
-      <v-text-field clearable hint="Bitte bestätige den AdminToken um die Umfrage zu löschen." persistent-hint
-        label="AdminToken:" variant="outlined" v-model="adminToken">
-      </v-text-field>
       <div>
 
       </div>
@@ -67,24 +97,77 @@
       <v-btn :icon="showSettings ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="showSettings = !showSettings">
       </v-btn>
       <v-label>Einstellungen {{ showSettings ? 'schließen' : 'öffnen' }}</v-label>
-      <v-btn id="ChangePoll" @click="sendEditPoll()" variant="outlined">
+      <v-btn id="ChangePoll" variant="outlined">
         Änderungen übernehmen!
+        <v-dialog
+          v-model="dialog"
+          activator="parent"
+          width="75%"
+          height="50%"
+        >
+          <v-card>
+            <v-text-field clearable hint="Bitte gebe den AdminToken ein um die Änderungen an der Umfrage zu bestätigen." persistent-hint
+                label="AdminToken:" variant="outlined" v-model="adminToken">
+            </v-text-field>
+            <v-card-actions>
+              <v-btn variant="outlined" block @click="sendEditPoll()">Änderungen übernehmen</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-btn>
     </v-card-actions>
+  </v-card>
+
+
+  <v-card class="resultPoll" v-if="Result">
+    <v-text-field id="question" readonly label="Frage:"
+      :hint="'Insgesamt wurden ' + store.state.question.result.count + ' Stimmen abgegeben.'" persistent-hint variant="outlined"
+      v-model="store.state.question.title">
+    </v-text-field>
+    <v-textarea v-if="store.state.question.description != ''" readonly label="Beschreibung:" variant="outlined"
+      v-model="store.state.question.description">
+    </v-textarea>
+    <div id="ShowResult" v-for="option, i in store.state.question.options">
+      <div class="text-caption">
+        {{option.title}}
+      </div>
+      <v-slider
+        readonly
+        v-model="store.state.question.result.votes[i].length"
+        :max="store.state.question.result.count"
+        thumb-label
+      ></v-slider>
+    </div>
+    <v-btn id="result" block @click="showPoll()" variant="outlined">
+        Ergebnis ausblenden
+    </v-btn>
   </v-card>
 </template>
 
 <script setup>
 import store from "../store/index"
 import { onMounted, ref, watch, reactive } from "vue";
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
 
-var showAdminInput = ref(false)
+var dialog = ref(false)
+var deleteDialog = ref(false)
+var voteDialog = ref(false)
 const showSettings = ref(false)
+
+
+const Poll = ref(true)
+const Result = ref(false)
+const Edit = ref(false)
+
+
+
+
 var adminToken = ref('')
-var editPollBool = ref(false)
+var editToken = ref('')
+var adminTokenDelete = ref('')
 var selected = ref([]);
 var name = ref('');
 var expiryModel = ref(0)
@@ -109,6 +192,19 @@ onMounted(() => {
 
 async function loadData() {
   const status = await store.methods.getPoll(route.params.token)
+
+  question.title = store.state.question.title
+  if(store.state.question.description != ''){
+    description.value = true
+    question.description = store.state.question.description
+  }
+  question.options = []
+  store.state.question.options.map((option) => {
+    question.options.push(option.title)
+  })
+  question.setting = store.state.question.setting
+  question.fixed = store.state.question.fixed
+
   if (status != 200) {
     router.push('/pollack/error')
   }
@@ -129,39 +225,42 @@ async function sendAnswer() {
     name: name.value,
     options: options
   }
-  console.log(vote)
   const response = await store.methods.postVote(store.state.question.share.value, vote)
-  console.log(response)
+  //console.log(response.data.edit.value)
+  voteDialog.value = true
   if (response != 200) {
     router.push('/pollack/error')
   }
-}
-
-function switchEditPoll() {
-  question.title = store.state.question.title
-  if(store.state.question.description != ''){
-    description.value = true
-    question.description = store.state.question.description
-  }
-  store.state.question.options.map((option) => {
-    question.options.push(option.title)
-  })
-  question.setting = store.state.question.setting
-  question.fixed = store.state.question.fixed
-
-  editPollBool.value = !editPollBool.value
+  selected.value = []
+  name.value = ''
 }
 
 async function sendEditPoll() {
-  question.setting.votes = getVotesModel()
+  if(adminToken.value != ''){
+    question.setting.votes = getVotesModel()
     question.setting.deadline = getExpiryDate()
-    const response = await store.methods.postPoll(question);
-    if(response != 200){
+    const response = await store.methods.putPoll(adminToken.value, question)
+    if (response != 200) {
       router.push('/pollack/error')
-    }else{
+    } else {
       loadData();
-      editPollBool.value = !editPollBool.value
+      dialog.value = false
+      question.options = [];
+      showPoll();
     }
+  }
+}
+
+async function deletePoll() {
+  if(adminTokenDelete.value != ''){
+    const response = await store.methods.deletePoll(adminTokenDelete.value)
+    if (response != 200) {
+      router.push('/pollack/error')
+    } else {
+      deleteDialog.value = false
+      router.push('/pollack/home')
+    }
+  }
 }
 
 const expiryTickLabels = {
@@ -272,6 +371,31 @@ function getVotesModel() {
   return votesModel.value
 }
 
+function showResult(){
+  loadData();
+  if(!Result.value){
+    Result.value = true;
+    Poll.value = false;
+    Edit.value = false;
+  }
+
+}
+function showEdit(){
+  loadData();
+  if(!Edit.value){
+    Edit.value = true;
+    Result.value = false;
+    Poll.value = false;
+  }
+}
+function showPoll(){
+  loadData();
+  if(!Poll.value){
+    Poll.value = true;
+    Result.value = false;
+    Edit.value = false;
+  }
+}
 </script>
 
 <style scoped>
@@ -295,7 +419,7 @@ function getVotesModel() {
   margin-left: -85%;
 }
 
-#admin {
+#vote {
   margin-left: auto;
 }
 
@@ -312,6 +436,10 @@ function getVotesModel() {
   margin-left: auto;
 }
 #DeletePoll{
+  margin-bottom: 1em;
+}
+#delete{
+  margin-left: 95%;
   margin-bottom: 1em;
 }
 </style>

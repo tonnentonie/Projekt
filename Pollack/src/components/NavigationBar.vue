@@ -38,7 +38,7 @@ const router = useRouter();
     color: white;
 }
 .v-btn:hover{
-    background-color: #bbbbbb;
+    background-color: lavender;
     color: #333333;
 }
 

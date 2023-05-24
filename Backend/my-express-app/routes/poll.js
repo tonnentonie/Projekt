@@ -7,6 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 const { validate } = require('uuid');
 
 const pollFilePath = './data/polls.json';
+const userFilePath = './data/users.json';
 
 // POST /poll/lack endpoint to create a new poll
 router.post('/lack', (req, res) => {
@@ -64,9 +65,11 @@ router.get('/lack/:token', (req, res) => {
 
     // Lese die polls.json Datei ein
     const pollData = JSON.parse(fs.readFileSync(pollFilePath));
+    const userData = JSON.parse(fs.readFileSync(userFilePath));
 
     // Finde den Index des entsprechenden shareCode in dem Array
     const pollIndex = pollData.findIndex((poll) => poll.shareCode === token);
+
 
     if (pollIndex === -1) {
         return res.status(404).json({
@@ -85,6 +88,37 @@ router.get('/lack/:token', (req, res) => {
             //const participants = pollData[pollIndex]
             //const voted = pollData[pollIndex].votes
 
+            //console.log(pollData[pollIndex].votes)
+            const options = []
+            const participants = []
+            const votedIds = []
+            
+            const numberOfOptions = pollData[pollIndex].options.length;
+            for (let i = 0; i < numberOfOptions; i++) {
+                // Erstelle ein Objekt für jede Option
+                const option = {
+                    voted: [], // Ein leeres Array für die Indexe der Teilnehmer, die für diese Option gestimmt haben
+                    worst: [], // Ein leeres Array für die Indexe der Teilnehmer, die diese Option als "if you must" oder "in the worst case" ausgewählt haben
+                };
+                // Füge das Optionen-Objekt dem options-Array hinzu
+                options.push(option);
+            }
+            
+            pollData[pollIndex].votes.map((vote) => {
+                const userIndex = userData.Pollack.findIndex(user => user.name === vote.owner.name);
+                if(!votedIds.includes(userIndex)){
+                    votedIds.push(userIndex)
+                    participants.push({
+                        name: vote.owner.name
+                    })
+                }
+                vote.choice.map((choice) => {
+                    if (!options[choice.id].voted.includes(userIndex)) {
+                        options[choice.id].voted.push(userIndex);
+                      }
+                })
+            })
+
             const poll = 
             {
                 body:{
@@ -98,8 +132,8 @@ router.get('/lack/:token', (req, res) => {
                         value: pollData[pollIndex].shareCode
                         }
             },
-                participants: [],
-                options: []
+                participants: participants,
+                options: options,
             };
 
             // Sende das Objekt als JSON

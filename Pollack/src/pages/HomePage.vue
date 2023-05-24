@@ -14,23 +14,7 @@
                 rounded="lg"
                 color="blue-grey"
                 @click="router.push('/pollack/search')">
-                Frage beantworten!
-            </v-btn>
-            <br/>
-            <v-btn 
-                prepend-icon="mdi-chat-question"
-                rounded="lg"
-                color="blue-grey"
-                @click="router.push('/pollack/search')">
-                Frage beantworten!
-            </v-btn>
-            <br/>
-            <v-btn 
-                prepend-icon="mdi-forum"
-                rounded="lg"
-                color="blue-grey"
-                @click="router.push('/pollack/search')">
-                Frage beantworten!
+                Token eingeben!
             </v-btn>
         </v-card>
     </div>
@@ -60,7 +44,7 @@ const router = useRouter();
     width: 500px;
     height: 500px;
     margin: auto;
-    padding-top: 4em;
+    padding-top: 9em;
 }
     
 .v-btn {

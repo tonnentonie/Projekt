@@ -12,6 +12,10 @@ const state = reactive({
         options: [],
         setting: null,
         fixed: null,
+        result: {
+            votes: [],
+            count: 0,
+        },
         share: null,
         admin: null,
     },
@@ -57,6 +61,12 @@ const methods = {
             state.question.setting = response.data.body.setting
             state.question.fixed = response.data.body.fixed
             state.question.share = response.data.body.share
+            state.question.result.count = 0
+            state.question.result.votes = []
+            response.data.options.map((option) => {
+                state.question.result.votes.push(option.voted)
+                state.question.result.count = state.question.result.count + option.voted.length
+            })
             return 200
         }else{
             state.error = response.data.message
@@ -70,7 +80,8 @@ const methods = {
         if(response.status == 200){
             state.error = null
         }else{
-            console.log(response.data.message)
+            console.log('error')
+            //console.log(response.data.message)
             state.error = response.data.message
         }
         return response.status
@@ -99,6 +110,7 @@ const methods = {
         console.log(response)
         if(response.status == 200){
             state.error = null
+            state.vote.edit = response.data.edit
         }else{
             console.log(response.data.message)
             state.error = response.data.message
@@ -123,6 +135,34 @@ const methods = {
             state.error = response.data.message
             return response.status
         }
+    },
+    async putVote(editToken, vote){
+        const choices = [];
+
+        vote.options.map((voteId) => {
+            choices.push({id: voteId, worst: false});
+        });
+
+        const response = await pollackApi.vote.putVote(editToken, vote.name, choices);
+        if(response.status == 200){
+            state.error = null
+            state.vote.edit = response.data.edit
+        }else{
+            console.log(response.data.message)
+            state.error = response.data.message
+        }
+        return response.status
+    },
+    async deleteVote(editToken){
+        const response = await pollackApi.vote.deleteVote(editToken);
+
+        if(response.status == 200){
+            state.error = null
+        }else{
+            console.log(response.data.message)
+            state.error = response.data.message
+        }
+        return response.status
     },
 
 

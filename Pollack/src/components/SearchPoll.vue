@@ -7,7 +7,7 @@
             variant="outlined" 
             v-model="shareToken">
         </v-text-field>
-        <v-btn @click="openPoll()" variant="outlined">
+        <v-btn block  @click="openPoll()" variant="outlined">
                 Umfrage öffnen!
         </v-btn>
         
@@ -17,7 +17,7 @@
             variant="outlined" 
             v-model="editToken">
         </v-text-field>
-        <v-btn @click="editVote()" variant="outlined">
+        <v-btn block @click="editVote()" variant="outlined">
                 Vote bearbeiten!
         </v-btn>
 
@@ -27,18 +27,16 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from 'vue-router';
-import store from "../store";
 const router = useRouter();
 
 const shareToken = ref('');
-const adminToken = ref('');
 const editToken = ref('');
 
 function openPoll(){
     router.push(`/pollack/poll/${shareToken.value}`)
 } 
 function editVote(){
-    router.push(`/pollack/edit/${editToken.value}`)
+    router.push(`/pollack/vote/${editToken.value}`)
 }
 
 </script>

@@ -6,6 +6,7 @@ const { validate } = require('uuid');
 const fs = require('fs');
 
 const pollFilePath = './data/polls.json';
+const userFilePath = './data/users.json';
 
 var pollIndex = -1;
 var voteIndex = -1;
@@ -35,6 +36,7 @@ router.post('/lack/:token', (req, res) => {
 
     // Lese die polls.json Datei ein
     const pollData = JSON.parse(fs.readFileSync(pollFilePath));
+    const userData = JSON.parse(fs.readFileSync(userFilePath));
 
     // Überprüfe ob alle benötigten Felder im Request Body vorhanden sind
     if (owner.name == null || !Array.isArray(choice)) {
@@ -49,6 +51,19 @@ router.post('/lack/:token', (req, res) => {
 
     // Finde den Index des entsprechenden shareCode in dem Array
     const pollIndex = pollData.findIndex((poll) => poll.shareCode === token);
+    const userIndex = userData.Pollack.findIndex(user => user.name === owner.name);
+
+    if (userIndex === -1) {
+        // Benutzer nicht vorhanden, füge ihn zum Array hinzu
+        const newUser = { 
+            id: userData.Pollack.length + 1,
+            name: owner.name };
+        userData.Pollack.push(newUser);
+      
+        // Speichere die aktualisierten Benutzerdaten in der user.json-Datei
+        fs.writeFileSync(userFilePath, JSON.stringify(userData));
+      }
+
 
     if (pollIndex === -1) {
         return res.status(404).json({

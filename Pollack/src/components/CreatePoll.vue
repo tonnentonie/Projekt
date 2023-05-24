@@ -63,24 +63,31 @@
             </v-btn>
         </v-card-actions>
     </v-card>
-    <v-card class="TokenCard" v-if="showToken">
-        <p>Speichere diese Token unbedingt ab um weiterhin auf deine Umfrage zugreifen zu können!</p>
-        <div>
+    <v-dialog
+        v-model="showToken"
+        width="75%"
+        height="50%"
+      >
+        <v-card class="TokenCard" v-if="showToken">
+            <p>Speichere diese Token unbedingt ab um weiterhin auf deine Umfrage zugreifen zu können!</p>
             <v-text-field 
               readonly 
               label="ShareToken:" 
               variant="outlined" 
               v-model="store.state.question.share.value">
             </v-text-field>
-          </div>
   
-        <v-text-field 
+          <v-text-field 
             readonly 
             label="AdminToken:" 
             variant="outlined" 
             v-model="store.state.question.admin.value">
-        </v-text-field>
-    </v-card>
+          </v-text-field>
+          <v-card-actions>
+            <v-btn variant="outlined" block @click="showToken = false">Dialog schließen</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
 </template>
 
   
@@ -254,6 +261,9 @@ function clearQuestion(){
     margin: auto;
     padding: 1em;
     width: 60%;
+}
+.TokenCard>p {
+  margin-bottom: 1em;
 }
 </style>
   
