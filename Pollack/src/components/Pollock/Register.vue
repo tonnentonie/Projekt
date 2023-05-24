@@ -9,7 +9,7 @@
             </v-btn>
             <h1 class="text-h5">Register</h1>
             <v-text-field 
-                v-model="username"
+                v-model="name"
                 prepend-inner-icon="mdi-account-outline" 
                 clearable 
                 label="Dein Name"
@@ -59,17 +59,18 @@ const router = useRouter();
 const name = ref('');
 const password = ref('');
 
-function einrichten() {
-    console.log(name);
-    console.log(password);
-    const status = store.pollock.user(name, password);
-    console.log(status.value);
+function register() {
+    console.log(name.value);
+    console.log(password.value);
+    const status = store.pollock.user.createUser(name.value, password.value);
+    console.log(status);
     if(status != 200){
-        router.push('/pollack/error')
+        router.push('/pollock/error')
     }
-
    
     store.state.dialog = true
+    router.push('/pollock/login');
+
 }
 
 </script>

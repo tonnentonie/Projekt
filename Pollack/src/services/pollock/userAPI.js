@@ -12,8 +12,8 @@ function createUser(name, password){
   return response;
 }
 
-function createAPIKey(name, password, key){
-  const response = axios.post(url + key, {
+function createAPIKey(name, password){
+  const response = axios.post(url + "key", {
     name: name,
     password: password
   })
@@ -21,11 +21,8 @@ return response;
 }
 
 function getUser(name){
-  const response = axios.get(url + name, {
-    name: name,
-    password: password
-  })
-
+  const response = axios.get(url + name)
+  return response;
 }
 
 function deleteUser(){
