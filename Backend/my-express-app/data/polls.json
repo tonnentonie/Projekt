@@ -1,1 +1,219 @@
-[{"title":"Test Frage","description":"","options":[{"id":0,"title":"1"},{"id":1,"title":"2"},{"id":2,"title":"3"},{"id":3,"title":"4"}],"setting":{"votes":3,"worst":false,"deadline":"2023-05-26T09:45:39.315Z"},"fixed":[false],"votes":[{"owner":{"name":"Philipp"},"choice":[{"id":0,"worst":false}],"date":"2023-05-24T08:48:30.979Z","editCode":"94b387a3-2b74-4094-b339-b20957092266"},{"owner":{"name":"Philipp2"},"choice":[{"id":0,"worst":false},{"id":1,"worst":false}],"date":"2023-05-24T08:48:45.744Z","editCode":"c812dd68-d7fd-4107-9b5b-01d5bebba32b"},{"owner":{"name":"Philipp"},"choice":[{"id":0,"worst":false},{"id":1,"worst":false},{"id":2,"worst":false}],"date":"2023-05-24T08:48:51.144Z","editCode":"b4eb3945-efa9-48a2-9644-eff5bf1775dc"}],"shareCode":"483565a4-b163-46a8-88bd-78c192294245","adminCode":"546f878d-d324-4290-a275-69df7f8e7a87"},{"title":"Test","description":"","options":[{"id":0,"title":"Test1234556"},{"id":1,"title":"Wie sieht das aus wenn hier etwas mehr steht?"},{"id":2,"title":"Test"}],"setting":{"votes":3,"worst":false,"deadline":"2023-05-24T11:25:09.698Z"},"fixed":[false],"votes":[{"owner":{"name":"Test"},"choice":[{"id":0,"worst":false}],"date":"2023-05-24T10:25:24.116Z","editCode":"121dd06b-f912-4321-a171-4e0419dcc27c"},{"owner":{"name":"Philipp"},"choice":[{"id":2,"worst":false}],"date":"2023-05-24T11:04:19.587Z","editCode":"84001d01-4ec0-4234-ad9e-764b0278a5f2"},{"owner":{"name":"Test13"},"choice":[{"id":1,"worst":false},{"id":0,"worst":false},{"id":2,"worst":false}],"date":"2023-05-24T11:05:41.146Z","editCode":"25883bb0-4079-4855-99e7-221be4f377a2"}],"shareCode":"940cfd9f-fa47-4404-a672-891cb61fa736","adminCode":"c13f7eae-f0ee-4bed-97ef-5c196af681de"},{"title":"Frage 13","description":"","options":[{"id":0,"title":"Antwort 1"},{"id":1,"title":"Antwort 2"},{"id":2,"title":"Antwort 3"},{"id":3,"title":"Antwort 4"},{"id":4,"title":"Neue Antwort"}],"setting":{"votes":5,"worst":false,"deadline":"2023-05-24T23:26:13.903Z"},"fixed":[false],"votes":[{"owner":{"name":"Philipp"},"choice":[{"id":2,"worst":false},{"id":0,"worst":false}],"date":"2023-05-24T11:31:36.123Z","editCode":"65e3f7e8-5ad1-4412-a5b3-21abd0f23ca7"}],"shareCode":"5f8f835f-033b-4e58-b80c-222f6f36479d","adminCode":"934b85ba-1a1a-4fc7-8dfc-cb99be416b71"}]
+[
+    {
+        "title": "Test Frage",
+        "description": "",
+        "options": [
+            {
+                "id": 0,
+                "title": "1"
+            },
+            {
+                "id": 1,
+                "title": "2"
+            },
+            {
+                "id": 2,
+                "title": "3"
+            },
+            {
+                "id": 3,
+                "title": "4"
+            }
+        ],
+        "setting": {
+            "votes": 3,
+            "worst": false,
+            "deadline": "2023-05-26T09:45:39.315Z"
+        },
+        "fixed": [
+            false
+        ],
+        "votes": [
+            {
+                "owner": {
+                    "name": "Philipp"
+                },
+                "choice": [
+                    {
+                        "id": 0,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-24T08:48:30.979Z",
+                "editCode": "94b387a3-2b74-4094-b339-b20957092266"
+            },
+            {
+                "owner": {
+                    "name": "Philipp2"
+                },
+                "choice": [
+                    {
+                        "id": 0,
+                        "worst": false
+                    },
+                    {
+                        "id": 1,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-24T08:48:45.744Z",
+                "editCode": "c812dd68-d7fd-4107-9b5b-01d5bebba32b"
+            },
+            {
+                "owner": {
+                    "name": "Philipp"
+                },
+                "choice": [
+                    {
+                        "id": 0,
+                        "worst": false
+                    },
+                    {
+                        "id": 1,
+                        "worst": false
+                    },
+                    {
+                        "id": 2,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-24T08:48:51.144Z",
+                "editCode": "b4eb3945-efa9-48a2-9644-eff5bf1775dc"
+            }
+        ],
+        "shareCode": "483565a4-b163-46a8-88bd-78c192294245",
+        "adminCode": "546f878d-d324-4290-a275-69df7f8e7a87"
+    },
+    {
+        "title": "Test",
+        "description": "",
+        "options": [
+            {
+                "id": 0,
+                "title": "Test1234556"
+            },
+            {
+                "id": 1,
+                "title": "Wie sieht das aus wenn hier etwas mehr steht?"
+            },
+            {
+                "id": 2,
+                "title": "Test"
+            }
+        ],
+        "setting": {
+            "votes": 3,
+            "worst": false,
+            "deadline": "2023-05-24T11:25:09.698Z"
+        },
+        "fixed": [
+            false
+        ],
+        "votes": [
+            {
+                "owner": {
+                    "name": "Test"
+                },
+                "choice": [
+                    {
+                        "id": 0,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-24T10:25:24.116Z",
+                "editCode": "121dd06b-f912-4321-a171-4e0419dcc27c"
+            },
+            {
+                "owner": {
+                    "name": "Philipp"
+                },
+                "choice": [
+                    {
+                        "id": 2,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-24T11:04:19.587Z",
+                "editCode": "84001d01-4ec0-4234-ad9e-764b0278a5f2"
+            },
+            {
+                "owner": {
+                    "name": "Test13"
+                },
+                "choice": [
+                    {
+                        "id": 1,
+                        "worst": false
+                    },
+                    {
+                        "id": 0,
+                        "worst": false
+                    },
+                    {
+                        "id": 2,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-24T11:05:41.146Z",
+                "editCode": "25883bb0-4079-4855-99e7-221be4f377a2"
+            }
+        ],
+        "shareCode": "940cfd9f-fa47-4404-a672-891cb61fa736",
+        "adminCode": "c13f7eae-f0ee-4bed-97ef-5c196af681de"
+    },
+    {
+        "title": "Frage 13",
+        "description": "",
+        "options": [
+            {
+                "id": 0,
+                "title": "Antwort 1"
+            },
+            {
+                "id": 1,
+                "title": "Antwort 2"
+            },
+            {
+                "id": 2,
+                "title": "Antwort 3"
+            },
+            {
+                "id": 3,
+                "title": "Antwort 4"
+            },
+            {
+                "id": 4,
+                "title": "Neue Antwort"
+            }
+        ],
+        "setting": {
+            "votes": 5,
+            "worst": false,
+            "deadline": "2023-05-24T23:26:13.903Z"
+        },
+        "fixed": [
+            false
+        ],
+        "votes": [
+            {
+                "owner": {
+                    "name": "Philipp"
+                },
+                "choice": [
+                    {
+                        "id": 2,
+                        "worst": false
+                    },
+                    {
+                        "id": 0,
+                        "worst": false
+                    }
+                ],
+                "date": "2023-05-24T11:31:36.123Z",
+                "editCode": "65e3f7e8-5ad1-4412-a5b3-21abd0f23ca7"
+            }
+        ],
+        "shareCode": "5f8f835f-033b-4e58-b80c-222f6f36479d",
+        "adminCode": "934b85ba-1a1a-4fc7-8dfc-cb99be416b71"
+    }
+]
